@@ -32,4 +32,13 @@ if st.button("Run Simulation"):
 
     gif_path = animate_agents(history, warehouse, skus)
     st.image(gif_path)
-
+    st.markdown("---")
+    st.markdown("### Note:")
+    st.markdown(
+        """
+        - 🟨 **Yellow tiles** represent **SKU locations** (storage/pickup points)  
+        - ⬛ **Black tiles** represent **obstacles** or blocked zones in the warehouse  
+        - 🔵 **Blue circles** are **robot agents**  
+        - 🟢 **Green circles** are **human agents**
+        """
+    )
