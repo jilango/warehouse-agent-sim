@@ -1,7 +1,6 @@
 import heapq
 
 def a_star(start, goal, grid):
-    """Returns a list of coordinates forming the shortest path from start to goal."""
     rows, cols = grid.shape
     open_set = []
     heapq.heappush(open_set, (0, start))
@@ -24,16 +23,14 @@ def a_star(start, goal, grid):
                 f_score[neighbor] = tentative_g + heuristic(neighbor, goal)
                 heapq.heappush(open_set, (f_score[neighbor], neighbor))
 
-    return []  # No path found
+    return []
 
 
 def heuristic(a, b):
-    """Manhattan distance heuristic for grid movement."""
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 
 def get_neighbors(pos, grid):
-    """Returns walkable neighboring positions (up, down, left, right)."""
     neighbors = []
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     rows, cols = grid.shape
@@ -47,7 +44,6 @@ def get_neighbors(pos, grid):
 
 
 def reconstruct_path(came_from, current):
-    """Rebuild path from end to start."""
     path = [current]
     while current in came_from:
         current = came_from[current]
