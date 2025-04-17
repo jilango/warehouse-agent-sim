@@ -28,7 +28,8 @@ if st.button("Run Simulation"):
             steps=steps,
         )
 
-    st.success("Simulation complete! Visualizing...")
+    st.success("Simulation complete! Rendering animation...")
 
-    fig = animate_agents(history, warehouse, skus)
-    st.pyplot(fig)
+    gif_path = animate_agents(history, warehouse, skus)
+    st.image(gif_path)
+

@@ -2,8 +2,9 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import matplotlib.animation as animation
 import numpy as np
+import os
 
-def animate_agents(history, warehouse, skus):
+def animate_agents(history, warehouse, skus, save_path="animation.gif"):
     rows, cols = warehouse.shape
     fig, ax = plt.subplots(figsize=(cols / 2, rows / 2))
 
@@ -20,9 +21,9 @@ def animate_agents(history, warehouse, skus):
 
         for r in range(rows):
             for c in range(cols):
-                if warehouse[r, c] == -1:  # Obstacle
+                if warehouse[r, c] == -1:
                     ax.add_patch(plt.Rectangle((c - 0.5, r - 0.5), 1, 1, color="black"))
-                elif warehouse[r, c] == 1:  # SKU
+                elif warehouse[r, c] == 1:
                     ax.add_patch(plt.Rectangle((c - 0.5, r - 0.5), 1, 1, color="yellow"))
 
     robot_patch = mpatches.Patch(color='blue', label='Robot')
@@ -39,5 +40,9 @@ def animate_agents(history, warehouse, skus):
         ax.set_title(f"Step {frame + 1}/{len(history)}")
         ax.legend(handles=[robot_patch, human_patch, sku_patch, obstacle_patch], loc='upper right')
 
-    ani = animation.FuncAnimation(fig, update, frames=len(history), interval=300, repeat=False)
-    return fig 
+    ani = animation.FuncAnimation(fig, update, frames=len(history), interval=500)
+
+    #GIF
+    ani.save(save_path, writer='pillow')
+
+    return save_path 
